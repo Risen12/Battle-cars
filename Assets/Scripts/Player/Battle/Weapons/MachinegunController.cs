@@ -11,6 +11,6 @@ public class MachinegunController : MonoBehaviour
     
     public void ShowAttackEffect()
     {
-        
+            
     }
 }
