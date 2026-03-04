@@ -16,7 +16,7 @@ namespace Enemy
         private void Awake()
         {
             _health = new Health(100);
-            //_healthShower.SetHealthComponent(_health);
+            _healthShower.SetHealthComponent(_health);
         }
 
         public void TakeDamage(float damage)

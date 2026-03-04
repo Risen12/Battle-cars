@@ -1,18 +1,23 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI.Health
 {
+    [RequireComponent(typeof(Slider))]
     public class HealthShower : MonoBehaviour
     {
-        [SerializeField] private Slider _slider;
         [SerializeField] private float _smoothIndex;
-        
-        private Coroutine _changeSliderValueSmooth;
 
+        private Coroutine _changeSliderValueSmooth;
+        private Slider _slider;
         private Core.Health _health;
+
+        private void Awake()
+        {
+            _slider = GetComponent<Slider>();
+        }
 
         private void OnDisable()
         {
@@ -22,9 +27,16 @@ namespace UI.Health
             }
         }
 
+        private void Update()
+        {
+            transform.LookAt(Camera.main.transform);
+        }
+
         public void SetHealthComponent(Core.Health health)
         {
             _health = health;
+            _slider.maxValue = health.Value;
+            _slider.value = _health.Value;
 
             _health.ValueChanged += OnHealthChanged;
         }
